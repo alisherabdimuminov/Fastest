@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ quiz.name }}{% endblock title %}
+
+{% block content %}
+<style>
+    #main {
+        background-image: url({% static "images/quiz.png" %});
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<div class="w-full flex justify-center">
+    <form method="post" id="regForm" class="mt-40 text-gray-200 w-1/2 font-semibold text-xl">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class="tab justify-center">
+            <p>{{ forloop.counter }}. {{ question.body }}</p>
+            <input class="w-4 h-4" value="a" required type="radio" name="{{forloop.counter}}_answer" id="answer_a_{{forloop.counter}}">
+            <label for="answer_a_{{forloop.counter}}">{{ question.answer_a }}</label> <br>
+    
+            <input class="w-4 h-4" value="b" required type="radio" name="{{forloop.counter}}_answer" id="answer_b_{{forloop.counter}}">
+            <label for="answer_b_{{forloop.counter}}">{{ question.answer_b }}</label> <br>
+    
+            <input class="w-4 h-4" value="c" required type="radio" name="{{forloop.counter}}_answer" id="answer_c_{{forloop.counter}}">
+            <label for="answer_c_{{forloop.counter}}">{{ question.answer_c }}</label> <br>
+    
+            <input class="w-4 h-4" value="d" required type="radio" name="{{forloop.counter}}_answer" id="answer_d_{{forloop.counter}}">
+            <label for="answer_d_{{forloop.counter}}">{{ question.answer_d }}</label> <br>
+        </div> <hr>
+        {% endfor %}
+        <div class="flex justify-end">
+            <button type="submit" class="">Tugatish</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load fastest %}
+{% block title %}Bosh sahifa {% endblock title %}
+
+{% block content %}
+<style>
+    #main {
+        background-image: url({% static "images/home.png" %});
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<div>
+    <br>
+    <p class="text-xl text-center">Testlar</p>
+    <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+            <div class="overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">ID</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Test nomi</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">O'tish bali</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Savollar soni</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Holati</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Natija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for quiz in quizzes %}
+                        <tr class="odd:bg-white even:bg-gray-100">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ forloop.counter }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                {{ quiz.name }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ quiz.passing_score }}%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ quiz.number }} ta</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-sm font-medium">{{ quiz|status:user }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                {% if quiz|result:user %}
+                                PDF
+                                {% else %}
+                                <a href="{% url 'quiz' quiz.id %}" class="bg-green-500 py-1 px-2 rounded-md text-white">Boshlash</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div
+</div>
+{% endblock %}
