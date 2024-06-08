@@ -46,10 +46,10 @@ def quiz_page(request: HttpRequest, id: int):
         for qi, qj in zip(questions, data):
             print(qi.correct, data[qj])
             if qi.correct == data[qj]:
-                d[qi.body] = "correct"
+                d[qj] = "correct"
                 correct += 1
             else:
-                d[qi.body] = "incorrect"
+                d[qj] = "incorrect"
         score = (correct / quiz.number) * 100
         if score >= quiz.passing_score:
             status = "passed"
