@@ -18,12 +18,12 @@ class UserModelAdmin(UserAdmin, ModelAdmin):
     form = UserUpdateForm
     add_fieldsets = (
         ("Yangi foydalanuvchi qo'shish", {
-            "fields": ("username", "first_name", "last_name", "middle_name", "branch")
-        })
+            "fields": ("username", "first_name", "last_name", "middle_name", "branch", "password1", "password2")
+        }),
     )
     fieldsets = (
         ("Foydalanuvchini tahrirlash", {
-            "fields": ("username", "first_name", "last_name", "middle_name", "branch"),
+            "fields": ("username", "first_name", "last_name", "middle_name", "branch", )
         }),
     )
 

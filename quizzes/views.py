@@ -46,10 +46,10 @@ def quiz_page(request: HttpRequest, id: int):
         for qi, qj in zip(questions, data):
             print(qi.correct, data[qj])
             if qi.correct == data[qj]:
-                d[qj] = "correct"
+                d[qi.body] = "correct"
                 correct += 1
             else:
-                d[qj] = "incorrect"
+                d[qi.body] = "incorrect"
         score = (correct / quiz.number) * 100
         if score >= quiz.passing_score:
             status = "passed"
@@ -71,5 +71,19 @@ def quiz_page(request: HttpRequest, id: int):
     return render(
         request=request,
         template_name="quiz.html",
+        context=context
+    )
+
+@login_required(login_url="login")
+def result(request: HttpRequest, id: int):
+    context = {}
+    res = get_object_or_404(Result, pk=id)
+    questions = res.questions.all()
+    context["result"] = res
+    context["questions"] = questions
+    print(res.answers)
+    return render(
+        request=request,
+        template_name="result.html",
         context=context
     )

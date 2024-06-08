@@ -40,7 +40,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-sm font-medium">{{ quiz|status:user }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                 {% if quiz|result:user %}
-                                PDF
+                                <a href="{% res_id quiz user  %}">Natija</a>
                                 {% else %}
                                 <a href="{% url 'quiz' quiz.id %}" class="bg-green-500 py-1 px-2 rounded-md text-white">Boshlash</a>
                                 {% endif %}

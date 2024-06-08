@@ -20,3 +20,15 @@ def result(quiz, user):
     if result:
         return True
     return False
+
+@register.simple_tag()
+def res_id(quiz, user):
+    return "result/" + str(Result.objects.filter(user=user, quiz=quiz).first().pk) + "/"
+
+
+@register.filter()
+def equal(answer, quiz):
+    print(quiz)
+    if answer == quiz.correct:
+        return "correct"
+    return answer + " " + quiz.correct

@@ -1,0 +1,43 @@
+{% load static %}
+{% load fastest %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastest | Test natijasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <style>
+        #main {
+            background-image: url({% static "images/home.png" %});
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <div id="main" class="h-screen w-full flex items-center justify-center">
+        <div class="mx-20">
+            <p>{{ result.created_at }}</p>
+            <table>
+                <thead class="border border-slate-900">
+                    <th class="border border-slate-900">ID</th>
+                    <th class="border border-slate-900">Foydalanuvchi</th>
+                    <th class="border border-slate-900">Test</th>
+                    <th class="border border-slate-900">Savollar soni</th>
+                    <th class="border border-slate-900">To'g'ri javoblar soni</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-slate-900">{{ result.pk }}</td>
+                        <td class="border border-slate-900">{{ result.user.first_name }} {{ result.user.last_name }}</td>
+                        <td class="border border-slate-900">{{ result.quiz.name }}</td>
+                        <td class="border border-slate-900">{{ result.quiz.number }}</td>
+                        <td class="border border-slate-900">{{ result.correct }}</td>
+                    </tr>
+                </tbody>
+            </table> <br>
+        </div>
+    </div>
+</body>
+</html>
